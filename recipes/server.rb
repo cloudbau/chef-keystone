@@ -96,7 +96,11 @@ template "/etc/keystone/keystone.conf" do
             :verbose => node["keystone"]["verbose"],
             :user => node["keystone"]["db"]["username"],
             :passwd => node["keystone"]["db"]["password"],
-            :ip_address => ks_admin_endpoint["host"],
+            # TODO:
+            # This should use ks_service_endpoint["host"] but only for the public service
+            # It seems to be impossbile to configure different IPs for internal and external
+            # services. So as a workaround we bind to any IP.
+            :ip_address =>  "0.0.0.0",
             :db_name => node["keystone"]["db"]["name"],
             :db_ipaddress => mysql_info["bind_address"],
             :service_port => ks_service_endpoint["port"],
