@@ -62,8 +62,10 @@ end
 
 service "keystone" do
   service_name platform_options["keystone_service"]
+  
+  provider Chef::Provider::Service::Upstart if platform?("ubuntu")
   supports :status => true, :restart => true
-  action [ :enable ]
+  action [ :enable, :start ]
   notifies :run, resources(:execute => "Keystone: sleep"), :immediately
 end
 
