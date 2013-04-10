@@ -76,6 +76,10 @@ directory "/etc/keystone" do
   mode "0755"
 end
 
+execute "Keystone PKI setup" do
+  command "keystone-manage pki_setup"
+end
+
 file "/var/lib/keystone/keystone.db" do
   action :delete
 end
@@ -87,6 +91,13 @@ end
 
 ks_admin_endpoint = get_bind_endpoint("keystone", "admin-api")
 ks_service_endpoint = get_bind_endpoint("keystone", "service-api")
+
+template "/etc/keystone/logging.conf" do
+  source "keystone-logging.conf.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+end
 
 template "/etc/keystone/keystone.conf" do
   source "keystone.conf.erb"
@@ -112,14 +123,6 @@ template "/etc/keystone/keystone.conf" do
             :log_facility => node["keystone"]["syslog"]["facility"]
             )
   notifies :run, resources(:execute => "keystone-manage db_sync"), :immediately
-  notifies :restart, resources(:service => "keystone"), :immediately
-end
-
-template "/etc/keystone/logging.conf" do
-  source "keystone-logging.conf.erb"
-  owner "root"
-  group "root"
-  mode "0644"
   notifies :restart, resources(:service => "keystone"), :immediately
 end
 
