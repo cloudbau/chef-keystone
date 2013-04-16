@@ -84,9 +84,15 @@ file "/var/lib/keystone/keystone.db" do
   action :delete
 end
 
+execute "clear keystone log" do
+  command "mv /var/log/keystone/keystone.log /var/log/keystone/keystone-old.log"
+  action :nothing
+end
+
 execute "keystone-manage db_sync" do
   command "keystone-manage db_sync"
   action :nothing
+  notifies :run, resources(:execute => "clear keystone log"), :immediately
 end
 
 ks_admin_endpoint = get_bind_endpoint("keystone", "admin-api")
