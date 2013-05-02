@@ -89,6 +89,13 @@ execute "clear keystone log" do
   action :nothing
 end
 
+template "/etc/keystone/logging.conf" do
+  source "keystone-logging.conf.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+end
+
 execute "keystone-manage db_sync" do
   command "keystone-manage db_sync"
   action :nothing
@@ -97,13 +104,6 @@ end
 
 ks_admin_endpoint = get_bind_endpoint("keystone", "admin-api")
 ks_service_endpoint = get_bind_endpoint("keystone", "service-api")
-
-template "/etc/keystone/logging.conf" do
-  source "keystone-logging.conf.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-end
 
 template "/etc/keystone/keystone.conf" do
   source "keystone.conf.erb"
