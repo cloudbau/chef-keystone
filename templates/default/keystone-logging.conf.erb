@@ -17,12 +17,12 @@ level=NOTSET
 handlers=file
 
 [logger_keystone]
-level=DEBUG
+level=ERROR
 handlers=file
 qualname=keystone
 
 [logger_combined]
-level=DEBUG
+level=ERROR
 handlers=file
 qualname=keystone-combined
 
@@ -34,7 +34,7 @@ args=(('localhost', handlers.SYSLOG_UDP_PORT), handlers.SysLogHandler.LOG_USER)
 
 [handler_file]
 class=FileHandler
-level=DEBUG
+level=ERROR
 formatter=normal_with_name
 args=('/var/log/keystone/keystone.log', 'w')
 
