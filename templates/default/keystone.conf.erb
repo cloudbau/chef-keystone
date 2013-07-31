@@ -11,9 +11,7 @@ bind_host = <%= @ip_address %>
 compute_port = 8774
 verbose = <%= @verbose %>
 debug = <%= @debug %>
-<% if @use_syslog == true %>
-# log_config = /etc/keystone/logging.conf
-<% else %>
+<% if node["keystone"]["logging.conf"]["use"]  %>
 log_config = /etc/keystone/logging.conf
 <% end %>
 

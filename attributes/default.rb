@@ -32,6 +32,10 @@ default["keystone"]["syslog"]["use"] = false
 default["keystone"]["syslog"]["facility"] = "LOG_LOCAL3"
 default["keystone"]["syslog"]["config_facility"] = "local3"
 
+default["keystone"]["logging.conf"]["use"] = false
+default["keystone"]["logging.conf"]["formatter"] = "keystone.openstack.common.log.LegacyFormatter"
+default["keystone"]["logging.conf"]["logfile"] = "/var/log/keystone/keystone.log"
+
 # default["keystone"]["roles"] = [ "admin", "Member", "KeystoneAdmin", "KeystoneServiceAdmin", "sysadmin", "netadmin" ]
 default["keystone"]["roles"] = [ "admin", "Member", "KeystoneAdmin", "KeystoneServiceAdmin" ]
 
