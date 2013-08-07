@@ -94,6 +94,7 @@ template "/etc/keystone/logging.conf" do
   owner "root"
   group "root"
   mode "0644"
+  only_if { File.exists?("/var/log/keystone/keystone.log") }  
 end
 
 execute "keystone-manage db_sync" do
