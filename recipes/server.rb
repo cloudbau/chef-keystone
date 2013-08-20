@@ -84,23 +84,17 @@ file "/var/lib/keystone/keystone.db" do
   action :delete
 end
 
-execute "clear keystone log" do
-  command "mv /var/log/keystone/keystone.log /var/log/keystone/keystone-old.log"
-  action :nothing
-end
 
 template "/etc/keystone/logging.conf" do
   source "keystone-logging.conf.erb"
   owner "root"
   group "root"
   mode "0644"
-  only_if { File.exists?("/var/log/keystone/keystone.log") }  
 end
 
 execute "keystone-manage db_sync" do
   command "keystone-manage db_sync"
   action :nothing
-  notifies :run, resources(:execute => "clear keystone log"), :immediately
 end
 
 ks_admin_endpoint = get_bind_endpoint("keystone", "admin-api")
