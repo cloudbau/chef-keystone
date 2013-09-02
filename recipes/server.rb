@@ -204,9 +204,9 @@ end
 
 ## Add Endpoints ##
 
-node["keystone"]["adminURL"] = ks_admin_endpoint["uri"]
-node["keystone"]["internalURL"] = ks_service_endpoint["uri"]
-node["keystone"]["publicURL"] = ks_service_endpoint["uri"]
+node.normal["keystone"]["adminURL"] = ks_admin_endpoint["uri"]
+node.normal["keystone"]["internalURL"] = ks_service_endpoint["uri"]
+node.normal["keystone"]["publicURL"] = ks_service_endpoint["uri"]
 
 Chef::Log.info "Keystone AdminURL: #{ks_admin_endpoint["uri"]}"
 Chef::Log.info "Keystone InternalURL: #{ks_service_endpoint["uri"]}"
