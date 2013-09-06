@@ -36,6 +36,8 @@ default["keystone"]["logging.conf"]["use"] = false
 default["keystone"]["logging.conf"]["formatter"] = "keystone.openstack.common.log.LegacyFormatter"
 default["keystone"]["logging.conf"]["logfile"] = "/var/log/keystone/keystone.log"
 
+default["keystone"]["token_driver"] = "keystone.token.backends.memcache.Token"
+
 # default["keystone"]["roles"] = [ "admin", "Member", "KeystoneAdmin", "KeystoneServiceAdmin", "sysadmin", "netadmin" ]
 default["keystone"]["roles"] = [ "admin", "Member", "KeystoneAdmin", "KeystoneServiceAdmin" ]
 
@@ -83,4 +85,3 @@ when "ubuntu"
     "package_options" => "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"
   }
 end
-

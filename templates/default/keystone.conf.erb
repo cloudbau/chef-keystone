@@ -51,7 +51,7 @@ driver = keystone.identity.backends.sql.Identity
 driver = keystone.catalog.backends.sql.Catalog
 
 [token]
-driver = keystone.token.backends.sql.Token
+driver = <%= @token_driver %>
 
 # Amount of time a token should remain valid (in seconds)
 expiration = 86400

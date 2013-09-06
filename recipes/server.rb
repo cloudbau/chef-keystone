@@ -121,7 +121,8 @@ template "/etc/keystone/keystone.conf" do
             :admin_port => ks_admin_endpoint["port"],
             :admin_token => node["keystone"]["admin_token"],
             :use_syslog => node["keystone"]["syslog"]["use"],
-            :log_facility => node["keystone"]["syslog"]["facility"]
+            :log_facility => node["keystone"]["syslog"]["facility"],
+            :token_driver => node["keystone"]["token_driver"]
             )
   notifies :run, resources(:execute => "keystone-manage db_sync"), :immediately
   notifies :restart, resources(:service => "keystone"), :immediately
