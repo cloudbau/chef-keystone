@@ -77,6 +77,8 @@ directory "/etc/keystone" do
 end
 
 execute "Keystone PKI setup" do
+  user "keystone"
+  group "keystone"
   command "keystone-manage pki_setup"
 end
 
@@ -93,6 +95,8 @@ template "/etc/keystone/logging.conf" do
 end
 
 execute "keystone-manage db_sync" do
+  user "keystone"
+  group "keystone"
   command "keystone-manage db_sync"
   action :nothing
 end
