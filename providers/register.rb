@@ -426,7 +426,7 @@ def _build_user_object(tenant_uuid, name, password, enabled)
     user_obj.store("password", password)
     # Have to provide a null value for this because I dont want to have this in the LWRP
     user_obj.store("email", nil)
-    user_obj.store("enabled", enabled == "true" ? 1 : 0)
+    user_obj.store("enabled", enabled == "true")
     ret = Hash.new
     ret.store("user", user_obj)
     return ret
