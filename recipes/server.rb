@@ -94,6 +94,8 @@ end
 
 execute "keystone-manage db_sync" do
   command "keystone-manage db_sync"
+  user "keystone"
+  group "keystone"
   action :nothing
 end
 
