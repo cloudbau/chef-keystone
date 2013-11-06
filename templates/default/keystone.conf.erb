@@ -57,7 +57,7 @@ driver = <%= @token_driver %>
 expiration = 86400
 
 [policy]
-driver = keystone.policy.backends.rules.Policy
+driver = keystone.policy.backends.sql.Policy
 
 [ec2]
 driver = keystone.contrib.ec2.backends.sql.Ec2

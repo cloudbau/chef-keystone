@@ -77,7 +77,7 @@ directory "/etc/keystone" do
 end
 
 execute "Keystone PKI setup" do
-  command "keystone-manage pki_setup"
+  command "keystone-manage pki_setup --keystone-user keystone --keystone-group keystone"
 end
 
 file "/var/lib/keystone/keystone.db" do
@@ -94,6 +94,8 @@ end
 
 execute "keystone-manage db_sync" do
   command "keystone-manage db_sync"
+  user "keystone"
+  group "keystone"
   action :nothing
 end
 
